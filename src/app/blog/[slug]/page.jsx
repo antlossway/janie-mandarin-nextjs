@@ -1,12 +1,46 @@
-import { getBlogPosts } from '@/lib/posts'
+import { getBlogPosts, getPostByName } from '@/lib/posts'
 import React from 'react'
 import formatDate from '@/lib/formatDate'
 import ReactMarkdown from 'react-markdown'
+import BackToList from '@/app/components/BackToList'
 
+export const revalidate = parseInt(process.env.REVALIDATE_INTERVAL)
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts() //deduped
+  if(!posts) return []
+
+  return posts.map(post => ({
+    slug: post.slug
+  }))
+}
+
+export async function generateMetadata ({params}) {
+  const {slug} = params
+  const post = await getPostByName(slug)
+
+  if(!post) {
+    return {
+      title: "Post Not Found"
+    }
+  }
+
+  return {
+    title: post.title,
+    date: formatDate(post.date),
+    description: post.description,
+    tag: post.tag
+  }
+}
 export default async function BlogPost({params}) {
   const {slug} = params
-  const posts = await getBlogPosts()
-  const post = posts.find(post => post.slug === slug )
+  // const posts = await getBlogPosts()
+  // const post = posts.find(post => post.slug === slug )
+
+  const post = await getPostByName(slug)
+  if (!post) return (
+    <p>post does not exists</p>
+  )
 
   return (
     <main className='wrapper py-10'>
@@ -18,6 +52,7 @@ export default async function BlogPost({params}) {
         </ReactMarkdown>
         {/* <ReactMarkdown># Hello, *world*!</ReactMarkdown> */}
       </article>
+      <BackToList />
     </main>
     )
 }

@@ -41,7 +41,7 @@ export default function Header() {
             </section>
 
             {/* click any empty area of the mobile-menu will close the menu */}
-            <section id="mobile-menu" className={showMobileMenu ? "absolute top-0 right-0 bg-black w-2/3 text-4xl flex flex-col justify-center origin-top animate-open-menu"
+            <section id="mobile-menu" className={showMobileMenu ? "absolute top-0 right-0 w-full bg-black/50 backdrop-blur-sm  text-white text-4xl flex flex-col justify-center origin-top animate-open-menu"
             : 'hidden' }
                 onClick={toggleMobileMenu}>
                 {/* close button */}
@@ -60,7 +60,7 @@ export default function Header() {
                         </Link>
                     ))}
 
-                    <Link className="bg-green-500 hover:bg-green-600 transition-all active:translate-y-1 text-white px-4 py-2 rounded-md font-semibold"
+                    <Link className="bg-green-500 hover:bg-green-600 transition-all active:translate-y-1 text-white text-3xl px-4 py-2 rounded-md font-semibold"
             href="/#contact">Contact me</Link>
                 </nav>
 

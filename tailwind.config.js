@@ -34,7 +34,7 @@ module.exports = {
         "amarante": "Amarante",
         "inter": "Inter",
         "grand-hotel": "'Grand Hotel'",
-        "noto-sans": "'Noto Sans'"
+        "noto-sans": "'Noto Sans SC",
       },
       fontSize: {
         // "intro-clamp": 'clamp(3.75rem, 3.4741379310344827rem + 1.3793103448275863vw, 5rem)'

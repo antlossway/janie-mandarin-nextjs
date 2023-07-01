@@ -9,7 +9,7 @@ export function getCoverUrl(coverUrl) {
     } else {
         coverUrl = uploadUrl + coverUrl
     }
-    console.log("debug getCoverUrl: ", coverUrl)
+    // console.log("debug getCoverUrl: ", coverUrl)
     return coverUrl
 }
 
@@ -20,7 +20,7 @@ export async function getBlogPosts() {
     const res = await myAxios.get('/articles?populate=*')
     const posts = res.data.data
 
-    // console.log("debug original post: ", posts[0])
+    // console.log("debug original post: ", posts[0].attributes.category.data.attributes.name)
     // console.log("debug original cover: ", posts[0].attributes.cover.data)
   // console.log(posts[0].attributes.blocks)
 
@@ -40,7 +40,8 @@ export async function getBlogPosts() {
             coverUrl: getCoverUrl(post?.attributes?.cover?.data?.attributes?.formats?.small?.url),
             coverAlt: post?.attributes?.cover?.data?.attributes?.alternativeText || "cover photo",
             content: content,
-            date: formatDate(post.attributes.updatedAt)
+            date: formatDate(post.attributes.updatedAt),
+            tag: post?.attributes?.category?.data?.attributes?.name,
         }
     })
 
@@ -48,4 +49,24 @@ export async function getBlogPosts() {
 
     return postsData
 
+}
+
+export async function getPostByName(slug) {
+    const posts = await getBlogPosts()
+    const post = posts.find(post => post.slug === slug )
+
+    if (!post) return undefined
+
+    return post
+}
+
+export async function getBlogTags() {
+    const posts = await getBlogPosts() //deduped
+
+    if (!posts) return []
+
+    const tags = new Set(posts.map(post => post.tag).flat())
+
+    // return Array.from(tags).map(tag => {tag})
+    return Array.from(tags)
 }

@@ -19,11 +19,10 @@ export default function Hero() {
                             with confidence</span>
                     </h1>
                 </div>
-                <div className='flex flex-col font-noto-sans text-5xl text-center text-darkgrey/80 '>
-                    <div className='text-2xl sm:text-3xl tracking-[0.2em]'>
-                        Wǒ yào shuō zhōng wén
-                    </div>
-                    <h2 className='tracking-[0.5em] sm:text-6xl'>
+                <div className='flex flex-col items-center justify-center font-noto-sans text-center text-darkgrey/80 '>
+                    <span className='text-2xl sm:text-3xl tracking-[0.1em]'>Wǒ yào shuō zhōng wén
+                    </span>
+                    <h2 className=' tracking-[0.5em] text-4xl font-medium sm:text-6xl'>
                         我要说中文
                     </h2>
                 </div>
