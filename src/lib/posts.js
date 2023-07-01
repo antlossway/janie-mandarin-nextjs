@@ -20,8 +20,8 @@ export async function getBlogPosts() {
     const res = await myAxios.get('/articles?populate=*')
     const posts = res.data.data
 
-    console.log("debug original post: ", posts[0])
-    console.log("debug original cover: ", posts[0].attributes.cover.data)
+    // console.log("debug original post: ", posts[0])
+    // console.log("debug original cover: ", posts[0].attributes.cover.data)
   // console.log(posts[0].attributes.blocks)
 
   // console.log(posts[0].attributes.cover.data.attributes.formats.small.url)
@@ -44,7 +44,7 @@ export async function getBlogPosts() {
         }
     })
 
-    console.log("debug after processed postsData: ", postsData[0])
+    // console.log("debug after processed postsData: ", postsData[0])
 
     return postsData
 
