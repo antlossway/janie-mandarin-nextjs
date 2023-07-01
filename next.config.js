@@ -13,7 +13,8 @@ const nextConfig = {
         domains: [
             "127.0.0.1",
             "images.pexels.com",
-            "unsplash.com"
+            "unsplash.com",
+            "api-janie.quinntougard.xyz"
         ]
 
     },

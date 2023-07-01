@@ -13,7 +13,9 @@ export default async function BlogPost({params}) {
       <article className='p-4 prose prose-base md:prose-lg prose-slate dark:prose-invert prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline'>
         <h1 className='capitalize'>{post.title}</h1>
         <span>{post.date}</span>
-        <ReactMarkdown children={post.content} />
+        <ReactMarkdown>
+          {post.content}
+        </ReactMarkdown>
         {/* <ReactMarkdown># Hello, *world*!</ReactMarkdown> */}
       </article>
     </main>

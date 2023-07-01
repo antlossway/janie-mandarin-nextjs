@@ -9,6 +9,7 @@ export function getCoverUrl(coverUrl) {
     } else {
         coverUrl = uploadUrl + coverUrl
     }
+    console.log("debug getCoverUrl: ", coverUrl)
     return coverUrl
 }
 
@@ -19,10 +20,10 @@ export async function getBlogPosts() {
     const res = await myAxios.get('/articles?populate=*')
     const posts = res.data.data
 
-      // console.log(posts[0])
+    console.log("debug original post: ", posts[0])
+    console.log("debug original cover: ", posts[0].attributes.cover.data)
   // console.log(posts[0].attributes.blocks)
 
-  // console.log(posts[0].attributes.cover.data)
   // console.log(posts[0].attributes.cover.data.attributes.formats.small.url)
   //   console.log(posts[0].attributes.cover.data.attributes.alternativeText)
 
@@ -42,6 +43,8 @@ export async function getBlogPosts() {
             date: formatDate(post.attributes.updatedAt)
         }
     })
+
+    console.log("debug after processed postsData: ", postsData[0])
 
     return postsData
 
