@@ -41,7 +41,7 @@ export default function Header() {
             </section>
 
             {/* click any empty area of the mobile-menu will close the menu */}
-            <section id="mobile-menu" className={showMobileMenu ? "absolute top-0 right-0 w-full bg-black/50 backdrop-blur-sm  text-white text-4xl flex flex-col justify-center origin-top animate-open-menu"
+            <section id="mobile-menu" className={showMobileMenu ? "absolute z-100 top-0 right-0 w-full bg-black/50 backdrop-blur-sm  text-white text-4xl flex flex-col justify-center origin-top animate-open-menu"
             : 'hidden' }
                 onClick={toggleMobileMenu}>
                 {/* close button */}
