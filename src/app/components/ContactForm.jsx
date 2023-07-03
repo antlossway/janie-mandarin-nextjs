@@ -54,30 +54,30 @@ export default function ContactForm() {
         e.preventDefault()
 
         setformStatus('loading')
-        // const res = await fetch('/api/sendmail', {
-        //     method: 'POST',
-        //     header: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         subject: `${values.name} send you a message`,
-        //         message: values.message,
-        //         type: "newMessage"
-        //     })
-        // })
+        const res = await fetch('/api/sendmail', {
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                subject: `${values.name} send you a message`,
+                message: values.message,
+                type: "newMessage"
+            })
+        })
 
-        // if(res.ok) {
-        //     setSent(true)
-        //     setformStatus('sent')
-        //     reset()
-        // } else {
-        //     setformStatus('error')
-        // }
+        if(res.ok) {
+            setSent(true)
+            setformStatus('sent')
+            reset()
+        } else {
+            setformStatus('error')
+        }
 
         // simulate delay
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        setSent(true)
-        reset()
+        // await new Promise((resolve) => setTimeout(resolve, 3000));
+        // setSent(true)
+        // reset()
     }
 
     const onChange = (e) => {
