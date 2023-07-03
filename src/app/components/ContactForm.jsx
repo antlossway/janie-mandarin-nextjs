@@ -60,7 +60,7 @@ export default function ContactForm() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                subject: `${values.name} send you a message`,
+                subject: `${values.name} from ${values.email} send you a message`,
                 message: values.message,
                 type: "newMessage"
             })
