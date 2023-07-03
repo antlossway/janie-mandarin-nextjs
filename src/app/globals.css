@@ -51,3 +51,21 @@ body {
     font-size: 15rem;
     color: #3c3c3c;
 } */
+
+input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+input:invalid[focused="true"]~span {
+  display: block;
+  color: red;
+}
+
+textarea:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+textarea:invalid[focused="true"]~span {
+  display: block;
+  color: red;
+}

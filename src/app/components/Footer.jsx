@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { Suspense } from 'react'
 import ContactForm from './ContactForm'
 
 export default function Footer() {
@@ -13,7 +13,10 @@ export default function Footer() {
                 src="/janie-photo.webp"
                 alt="profile photo" />
 
-          <ContactForm />
+          {/* <Suspense fallback={<p>Loading feed...</p>}> */}
+              <ContactForm />
+          {/* </Suspense> */}
+
           <div className='flex flex-col gap-2 text-sm'>
             <span>Email address: janiechinese@gmail.com</span>
             <span>Wechat number: janie-chen-mandarin</span>

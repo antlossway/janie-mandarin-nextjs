@@ -1,22 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function FormInput({data}) {
+export default function FormInput(props) {
+  const [focused, setFocused] = useState(false)
+
+  const {id, label, type, errorMessage, onChange, ...inputProps} = props
+
+  const handleFocus = (e) => {
+    setFocused(true)
+  }
 
   return (
 
     <div className='flex flex-col items-stretch'>
-        <label htmlFor={data.inputId}>{data.label}</label>
+        <label htmlFor={id}>{label}</label>
         {
-            data.type === 'textarea' ?
-            <textarea id={data.inputId} required
+            type === 'textarea' ?
+            <textarea id={id}
                     cols="25"
                     rows="4"
-                    className='bg-form-input-bg px-4 py-2 rounded-sm outline-none'>
+                    className='bg-form-input-bg px-4 py-2 rounded-sm outline-none'
+                    {...inputProps}
+                    onChange={onChange}  >
                     </textarea>
             :
-            <input type={data.type} id={data.inputId} required
-                className='bg-form-input-bg px-4 py-2 rounded-sm outline-none'/>
+            <input type={type} id={id}
+                className='bg-form-input-bg px-4 py-2 rounded-sm outline-none'
+                {...inputProps}
+                onChange={onChange}
+            />
+
         }
+        <span className="text-sm hidden invalid">{errorMessage}</span>
     </div>
   )
 }
