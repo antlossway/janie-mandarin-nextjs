@@ -93,7 +93,7 @@ export async function getBlogPosts(pageParam) {
 }
 
 export async function getPostByName(slug) {
-    const {posts, meta} = await getBlogPosts()
+    const {posts} = await getBlogPosts()
     const post = posts.find(post => post.slug === slug )
 
     if (!post) return undefined
