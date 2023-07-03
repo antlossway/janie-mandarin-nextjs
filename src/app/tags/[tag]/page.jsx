@@ -49,8 +49,11 @@ export default async function TagPostList({params}) {
     }
   return (
     <main className='container py-10'>
-        <div className='wrapper grid place-items-center place-content-center '>
+        <div className='wrapper grid place-items-center gap-4 '>
             <h1 className='text-center text-3xl sm:text-4xl font-bold'>Posts in category #{tag}</h1>
+            <div className='place-self-start'>
+                <BackToList />
+            </div>
             <ul className='m-10 mx-auto grid grid-cols-12 gap-4 sm:gap-10'>
 
             {tagPosts.map(post => (
@@ -62,7 +65,6 @@ export default async function TagPostList({params}) {
             )}
             </ul>
 
-            <BackToList />
         </div>
     </main>
   )

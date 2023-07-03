@@ -23,8 +23,18 @@ export default async function blog({ searchParams}) {
 
   return (
     <main className='container py-10'>
-      <div className='wrapper grid place-items-center place-content-center '>
+      <div className='wrapper grid place-items-center gap-4 '>
         <h1 className='text-center text-3xl sm:text-4xl font-bold'>Blog posts <span className='text-lg'>(total {allPosts.length} posts)</span></h1>
+
+        {/* categories only shown in bigger screen */}
+        <ul className='hidden place-self-start sm:flex sm:gap-4 sm:justify-between'>
+        {
+          tags.map((tag,index) => (
+            <Link key={index} href={`/tags/${tag}`}
+              className='hover:underline'>{tag}</Link>
+          ))
+        }
+        </ul>
 
         <ul className='m-10 mx-auto grid grid-cols-12 gap-4 sm:gap-10'>
 
@@ -37,13 +47,8 @@ export default async function blog({ searchParams}) {
           )}
         </ul>
 
-        {/* <ul className='flex flex-col gap-4 sm:flex-row sm:justify-between'>
-        {
-          tags.map((tag,index) => (
-            <Link key={index} href={`/tags/${tag}`}>{tag}</Link>
-          ))
-        }
-        </ul> */}
+
+
 
         <Pagination paginationData={meta.pagination} />
 
