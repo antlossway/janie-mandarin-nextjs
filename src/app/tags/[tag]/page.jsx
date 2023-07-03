@@ -7,7 +7,7 @@ import React from 'react'
 export const revalidate = parseInt(process.env.REVALIDATE_INTERVAL)
 
 export async function generateStaticParams() {
-    const posts = await getBlogPosts() //deduped
+    const {posts} = await getBlogPosts() //deduped
 
     if (!posts) return []
 
@@ -27,7 +27,7 @@ export async function generateMetadata({params}) {
 
 export default async function TagPostList({params}) {
     const {tag} = params
-    const posts = await getBlogPosts()
+    const {posts} = await getBlogPosts()
     if(!posts) {
         return <p className='mt-10 text-center'>Sorry, no posts available for category {tag}</p>
     }

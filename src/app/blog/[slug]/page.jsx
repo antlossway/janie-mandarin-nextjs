@@ -7,7 +7,7 @@ import BackToList from '@/app/components/BackToList'
 export const revalidate = parseInt(process.env.REVALIDATE_INTERVAL)
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts() //deduped
+  const {posts} = await getBlogPosts() //deduped
   if(!posts) return []
 
   return posts.map(post => ({
