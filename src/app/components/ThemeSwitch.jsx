@@ -1,24 +1,3 @@
-# What I learned
-
-## darkmode
-
-1. create component "ThemeSwitch"
-   useState will set initial theme to be "light", then useEffect will check if there is theme in localStorage, the localStorage is updated by the toggle button.
-   if there is no theme in localStorage, we check system preference.
-
-2. update tailwind.config.js
-
-```
-darkMode: "class",
-```
-
-3. update components where need to define darkmode style
-
-4. make sure "ThemeSwitch.jsx" add "dark" in document's class
-
-the final code will looks like this:
-
-```
 "use client";
 import React, { useEffect, useState } from "react";
 import { BsMoon, BsSun } from "react-icons/bs";
@@ -69,6 +48,3 @@ export default function ThemeSwitch() {
     </button>
   );
 }
-
-
-```
