@@ -73,11 +73,12 @@ export async function getAllPosts() {
 const getCategories = async () => {
   const res = await myAxios.get("/categories?_fields=id,slug");
   const data = res.data; //array of object
-  // console.log(data, typeof data);
+  // console.log(data, Array.isArray(data));
 
   const categoryMap = new Map(); // id to name
   const categoryMapNameToId = new Map(); // name to id
-  data.forEach((item) => {
+
+  data?.forEach((item) => {
     categoryMap.set(item.id, item.slug);
     categoryMapNameToId.set(item.slug, item.id);
   });
