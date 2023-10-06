@@ -45,8 +45,8 @@ export default function Hero() {
           width={300}
           height={300}
           // fill={true}
-          // src="/profile-photo.png"
-          src="/janie-photo.webp"
+          src="/profile-photo.png"
+          // src="/janie-photo.webp"
           alt="profile photo"
         />
       </section>

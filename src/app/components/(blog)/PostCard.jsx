@@ -1,33 +1,44 @@
-import Image from 'next/image'
-import React from 'react'
-import { uploadUrl } from '@/lib/url'
-import Link from 'next/link'
+import React from "react";
+import Image from "next/image";
+// import parseHTML from "html-react-parser";
+import Link from "next/link";
 
-export default function PostCard({post}) {
-  const {title, description, slug,coverUrl, coverAlt} = post
-
+const PostCard = ({ post }) => {
   return (
-    // to make each card same height, need to use h-full
-    <Link href={`/blog/${slug}`}  >
-      <div className='h-full
-       bg-white rounded-lg shadow-md
-       flex flex-col items-center gap-4 text-center'>
-            <figure className='relative w-full h-[200px] overflow-hidden '>
-              <Image className='object-cover object-center '
-                  fill={true}
-                  // width={400}
-                  // height={200}
-                  src={coverUrl}
-                  alt={coverAlt}
-                  />
-            </figure>
-          <div className='w-full p-4 flex flex-col items-center gap-2 text-center'>
-            <h2 className='text-3xl '>{title}</h2>
-            <p className="text-normal max-w-[30ch] flex-1">
-              {description}
-            </p>
-          </div>
+    <Link href={`/blog/${post.slug}`}>
+      <div
+        className="relative h-full bg-white dark:bg-stone-300 rounded-lg shadow-md
+      flex flex-col items-center gap-4 text-center
+    "
+      >
+        {/* post featured image */}
+        <figure className="relative w-full h-[200px] overflow-hidden">
+          <Image
+            className="object-cover object-center"
+            src={post.featuredImgUrl}
+            alt="post image"
+            fill
+          />
+        </figure>
+
+        {/* post title and excerpt */}
+        <div
+          className="w-full p-4 flex-1
+        flex flex-col items-center gap-2 text-center"
+        >
+          <h1 className="text-2xl">{post.title}</h1>
+          {/* <div className="text-normal max-w-[30ch]">
+            {parseHTML(post.excerpt)}
+          </div> */}
+        </div>
+
+        {/* category */}
+        <span className="self-start p-4  font-medium text-xs uppercase italic text-purple-500 ">
+          {post.category}
+        </span>
       </div>
-      </Link>
-  )
-}
+    </Link>
+  );
+};
+
+export default PostCard;

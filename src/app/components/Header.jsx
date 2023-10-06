@@ -19,14 +19,14 @@ export default function Header() {
   return (
     // white will extend the full screen wide
     // height of header is around 80px
-    <header className="container bg-white sticky top-0 z-10 h-20 ">
+    <header className="container bg-white dark:bg-slate-600 sticky top-0 z-10 h-20 ">
       <section className="wrapper h-full p-4 flex justify-between items-center ">
         <Image width={100} height={50} src="/Logo.png" alt="logo" />
         <div>
           {/* hamberger icon */}
           <button
             id="hamburger-btn"
-            className="text-3xl md:hidden cursor-pointer"
+            className="text-3xl md:hidden cursor-pointer dark:text-white"
             onClick={toggleMobileMenu}
           >
             &#9776;

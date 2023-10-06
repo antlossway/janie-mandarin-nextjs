@@ -1,71 +1,44 @@
-import PostCard from '@/app/components/(blog)/PostCard'
-import BackToList from '@/app/components/BackToList'
-import { getBlogPosts } from '@/lib/posts'
-import Link from 'next/link'
-import React from 'react'
+import PostGrid from "@/app/components/(blog)/PostGrid";
+import BackToList from "@/app/components/BackToList";
+import { getPostsByCategory } from "@/lib/wp-rest";
 
-export const revalidate = parseInt(process.env.REVALIDATE_INTERVAL)
+import React from "react";
 
-export async function generateStaticParams() {
-    const {posts} = await getBlogPosts() //deduped
+export const revalidate = parseInt(process.env.REVALIDATE_INTERVAL);
 
-    if (!posts) return []
+// export async function generateStaticParams() {
+//   const { posts } = await getBlogPosts(); //deduped
 
-    const tags = new Set(posts.map(post => post.tag).flat())
+//   if (!posts) return [];
 
-    // return Array.from(tags).map(tag => {tag})
-    return Array.from(tags)
-}
+//   const tags = new Set(posts.map((post) => post.tag).flat());
 
-export async function generateMetadata({params}) {
-    const {tag} = params
+//   // return Array.from(tags).map(tag => {tag})
+//   return Array.from(tags);
+// }
 
-    return {
-        title: `posts in category ${tag}`
-    }
-}
+// export async function generateMetadata({ params }) {
+//   const { tag } = params;
 
-export default async function TagPostList({params}) {
-    const {tag} = params
-    const {posts} = await getBlogPosts()
-    if(!posts) {
-        return <p className='mt-10 text-center'>Sorry, no posts available for category {tag}</p>
-    }
+//   return {
+//     title: `posts in category ${tag}`,
+//   };
+// }
 
-    const tagPosts = posts.filter(post => post.tag === tag)
+export default async function TagPostList({ params }) {
+  const { tag } = params;
+  const { posts, totalNumOfPost } = await getPostsByCategory(tag);
+  if (!posts) return <p>Category `${tag}` has no articles</p>;
 
-    // console.log("posts in category: ",tag,  tagPosts)
-
-    if (!tagPosts.length) {
-        return (
-            <div className='text-center'>
-                <p className='mt-10'>
-                    Sorry, no posts has that tag.
-                </p>
-                <Link href="/blog">Back to List</Link>
-            </div>
-        )
-
-    }
   return (
-    <main className='container py-10'>
-        <div className='wrapper grid place-items-center gap-4 '>
-            <h1 className='text-center text-3xl sm:text-4xl font-bold'>Posts in category #{tag}</h1>
-            <div className='place-self-start'>
-                <BackToList />
-            </div>
-            <ul className='m-10 mx-auto grid grid-cols-12 gap-4 sm:gap-10'>
+    <div className="wrapper mx-auto py-8 grid place-items-center gap-4">
+      <h1 className="text-center text-3xl font-bold">#{tag}</h1>
+      <span className="text-lg">(total {totalNumOfPost})</span>
+      <div className="text-left">
+        <BackToList />
+      </div>
 
-            {tagPosts.map(post => (
-                <li key={post.id} className='max-w-xs sm:max-w-none col-span-full sm:col-span-6 lg:col-span-4 xl:col-span-3'>
-                <PostCard post={post} />
-                </li>
-
-            )
-            )}
-            </ul>
-
-        </div>
-    </main>
-  )
+      <PostGrid posts={posts} totalNumOfPost={totalNumOfPost} />
+    </div>
+  );
 }
